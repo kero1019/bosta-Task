@@ -5,7 +5,6 @@ import moment from "moment/moment";
 
 export default function CargoHeader() {
 	const {  data } = useContext(MyContext);
-		console.log(data.CurrentStatus.timestamp)
 		const lastUpdate = moment(data.CurrentStatus.timestamp).format("dddd DD/M/YYYY [at] h:mm a");
 		const promisedDate = moment(data.promisedDate).format("D MMM YYYY");
 

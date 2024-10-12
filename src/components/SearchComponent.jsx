@@ -18,7 +18,6 @@ export default function SearchComponent({setId ,id}) {
             console.log("the id == >", id)
             const res = await axios.get(`https://tracking.bosta.co/shipments/track/${id}`)
             setData(res.data);
-            console.log("res.data: ", res.data)
         } catch(error){
             console.error("The Error is  ==> ", Error.error)
         }
