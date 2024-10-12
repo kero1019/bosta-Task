@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-
+import image from '../../public/second.png'
 export default function Address() {
 const { t } = useTranslation();
 
@@ -15,7 +15,7 @@ const { t } = useTranslation();
 					<p>{t('report')}</p>
 					<button>{t('buttonReport')} </button>
 				</div>
-				<img src="/second.png" alt="Photo" />
+				<img src={image} alt="Photo" />
 			</div>
 		</div>
 	);

@@ -4,6 +4,7 @@ import SearchComponent from "./SearchComponent";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useMediaQuery } from "react-responsive";
 import { useTranslation } from "react-i18next";
+import Logo from '../../public/Logo.png'
 
 export default function Navbar() {
 	const isSmallScreen = useMediaQuery({ query: "(max-width: 922px)" });
@@ -32,7 +33,7 @@ function SmallNav() {
 				<RxHamburgerMenu onClick={handelDisplaySmallNav} />
 				<div className="logo-part">
 					<p>{t("logo")}</p>
-					<img src="/Logo.png" alt="Logo" />
+					<img src={Logo} alt="Logo" />
 				</div>
 				{displaySmallNav && (
 					<div className="menu-items">
