@@ -16,7 +16,7 @@ export default function CargoDetails() {
 		<>
 			{isSmallScreen ? (
 				<>
-					<p style={{ fontWeight: "bold" }}>Cargo Details</p>
+					<p style={{ fontWeight: "bold" }}>{t('cargoDetails')}</p>
 					{data.TransitEvents.map((item, index) => {
 						const date = moment(item.timestamp).format("DD/MM/YYYY");
 						const time = moment(item.timestamp).format("hh:mm a");
