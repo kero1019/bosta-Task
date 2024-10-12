@@ -4,8 +4,11 @@ import { MyContext } from "../App";
 import moment from "moment";
 import { useMediaQuery } from "react-responsive";
 import Card from "./Card";
+import { useTranslation } from "react-i18next";
+
 
 export default function CargoDetails() {
+	const { t } = useTranslation();
 	const { data } = useContext(MyContext);
 	const isSmallScreen = useMediaQuery({ query: "(max-width: 922px)" });
 
@@ -30,14 +33,14 @@ export default function CargoDetails() {
 				</>
 			) : (
 				<div className="cargo-details">
-					<p>Cargo Details</p>
+					<p>{t('cargoDetails')}</p>
 					<table>
 						<thead>
 							<tr>
-								<th>Branch</th>
-								<th>Date</th>
-								<th>Time</th>
-								<th>Details</th>
+								<th>{t('branch')}</th>
+								<th>{t('date')}</th>
+								<th>{t('time')}</th>
+								<th>{t('details')}</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -49,7 +52,7 @@ export default function CargoDetails() {
 										<td>{item.hub || "-"}</td>
 										<td>{date}</td>
 										<td>{time}</td>
-										<td>{item.state}</td>
+										<td>{t(`${item.state}`)}</td>
 									</tr>
 								);
 							})}

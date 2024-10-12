@@ -4,6 +4,26 @@ import Cargo from "./components/Cargo";
 import CargoDetails from "./components/CargoDetails";
 import Navbar from "./components/Navbar";
 import React, { createContext } from "react";
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import en from "./assets/eng.json";
+import ar from "./assets/ar.json";
+import { useTranslation } from "react-i18next";
+import moment from "moment/moment";
+import 'moment/locale/ar'; // Arabic locale
+import 'moment/locale/en-gb'; // English locale
+
+i18n.use(initReactI18next).init({
+	resources: {
+		en: { translation: en },
+		ar: { translation: ar },
+	},
+	lng: "en", // default language
+	fallbackLng: "en", // fallback language
+	interpolation: {
+		escapeValue: false, // react already safes from xss
+	},
+});
 export const MyContext = createContext();
 
 function App() {
@@ -45,6 +65,9 @@ function App() {
 			},
 		],
 	});
+	const { i18n } = useTranslation();
+	moment.locale(`${i18n.language}`)
+
 	return (
 		<MyContext.Provider value={{ data, setData }}>
 			<div className="App">

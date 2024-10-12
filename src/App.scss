@@ -11,11 +11,9 @@ body {
 }
 
 .App {
-	// background-color: #EEE;
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
-	// gap: 4rem;
 }
 
 @mixin mobile {
@@ -54,8 +52,8 @@ main {
 		background-color: white;
 		z-index: 1;
 
-		p {
-			// background-color: green;
+		> p:first-child {
+			color: red;
 		}
 	}
 
@@ -75,7 +73,6 @@ main {
 	}
 	p:hover {
 		border-radius: 5px;
-		// background-color: #eee;
 		color: #e30613;
 	}
 
@@ -194,7 +191,6 @@ main {
 	}
 
 	div {
-		// background-color: #e30613;
 		p:first-child {
 			color: gray;
 		}
@@ -223,7 +219,7 @@ main {
 	}
 
 	.ant-steps-item {
-		flex: 0 1 auto;
+		flex: 1 1 auto;
 		flex-basis: 200px;
 	}
 
@@ -282,7 +278,7 @@ main {
 						background-color: #f9ba02 !important;
 					}
 					@include mobile() {
-						background-color: #f9ba02;
+						background-color: #f9ba02 !important;
 					}
 				}
 			}
@@ -328,6 +324,10 @@ main {
 	@include mobile() {
 		display: flex;
 		flex-direction: column;
+	}
+	button{
+		font-weight: bold;
+		font-size: 1rem;
 	}
 }
 
@@ -450,7 +450,6 @@ main {
 		gap: 1rem;
 
 		p:last-child {
-			color: red;
 			width: 100%;
 			white-space: nowrap;
 			overflow: hidden;

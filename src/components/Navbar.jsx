@@ -3,6 +3,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import SearchComponent from "./SearchComponent";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useMediaQuery } from "react-responsive";
+import { useTranslation } from "react-i18next";
 
 export default function Navbar() {
 	const isSmallScreen = useMediaQuery({ query: "(max-width: 922px)" });
@@ -11,11 +12,18 @@ export default function Navbar() {
 }
 
 function SmallNav() {
+	const { t, i18n } = useTranslation();
 	const [displaySmallNav, setDisplaySmallNav] = React.useState(false);
 	const [id, setId] = React.useState();
+	const [searchBar, setSearchBar] = React.useState(false);
 
 	const handelDisplaySmallNav = () => {
 		setDisplaySmallNav(!displaySmallNav);
+	};
+
+	const handleLanguageChange = () => {
+		const newLang = i18n.language === "en" ? "ar" : "en";
+		i18n.changeLanguage(newLang);
 	};
 
 	return (
@@ -23,17 +31,23 @@ function SmallNav() {
 			<nav className="navbar sm">
 				<RxHamburgerMenu onClick={handelDisplaySmallNav} />
 				<div className="logo-part">
-					<p>Bosta</p>
-					<img src="/Logo.png" alt="Photo" />
+					<p>{t("logo")}</p>
+					<img src="/Logo.png" alt="Logo" />
 				</div>
 				{displaySmallNav && (
 					<div className="menu-items">
-						<p className="language">ENG</p>
-						<p>Login</p>
-						<SearchComponent setId={setId} id={id} />
-						<p>Call Center</p>
-						<p>Prices</p>
-						<p>Home</p>
+						<p className="language" onClick={handleLanguageChange}>
+							{i18n.language === "en" ? "ENG" : "عربي"}
+						</p>
+						<p>{t("login")}</p>
+						<SearchComponent
+							setId={setId}
+							id={id}
+							handleClose={setDisplaySmallNav}
+						/>
+						<p>{t("call")}</p>
+						<p>{t("price")}</p>
+						<p>{t("main")}</p>
 					</div>
 				)}
 			</nav>
@@ -42,12 +56,13 @@ function SmallNav() {
 }
 
 function DefaultNav() {
+	const { t, i18n } = useTranslation();
 	const [searchBar, setSearchBar] = React.useState(false);
 	const [hovered, setHovered] = React.useState(false);
 	const [id, setId] = React.useState();
 
 	const handleSearchBar = () => {
-		setSearchBar(!searchBar); // Toggle the search bar on click
+		setSearchBar(!searchBar);
 	};
 
 	const handleMouseEnter = () => {
@@ -60,11 +75,18 @@ function DefaultNav() {
 		}
 	};
 
+	const handleLanguageChange = () => {
+		const newLang = i18n.language === "en" ? "ar" : "en";
+		i18n.changeLanguage(newLang);
+	};
+
 	return (
 		<nav className="navbar lg">
 			<div className="last-part">
-				<p className="language">ENG</p>
-				<p>Login</p>
+				<p className="language" onClick={handleLanguageChange}>
+					{i18n.language === "en" ? "ENG" : "عربي"}
+				</p>
+				<p>{t("login")}</p>
 				<div className="track-container">
 					<p
 						className="search-paragraph"
@@ -72,24 +94,26 @@ function DefaultNav() {
 						onMouseEnter={handleMouseEnter}
 						onMouseLeave={handleMouseLeave}
 					>
-						Track Your Cargo
+						{t("trackYourCargo")}
 						<IoIosArrowForward
 							className={`arrow-icon ${hovered || searchBar ? "Active" : ""}`}
 						/>
 					</p>
-					{searchBar && <SearchComponent setId={setId} id={id} />}
+					{searchBar && (
+						<SearchComponent setId={setId} id={id} handleClose={setSearchBar} />
+					)}
 				</div>
 			</div>
 
 			<div className="middle-part">
-				<p>Call Center</p>
-				<p>Prices</p>
-				<p>Home</p>
+				<p>{t("call")}</p>
+				<p>{t("price")}</p>
+				<p>{t("main")}</p>
 			</div>
 
 			<div className="logo-part">
-				<p>Bosta</p>
-				<img src="/Logo.png" alt="Photo" />
+				<p>{t("logo")}</p>
+				<img src="/Logo.png" alt="Logo" />
 			</div>
 		</nav>
 	);

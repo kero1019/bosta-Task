@@ -3,9 +3,11 @@ import React from "react";
 import { FiSearch } from "react-icons/fi";
 import  { useContext } from 'react';
 import { MyContext } from "../App";
+import { useTranslation } from "react-i18next";
 
-export default function SearchComponent({setId ,id}) {
+export default function SearchComponent({setId ,id, handleClose}) {
     const {  setData } = useContext(MyContext);
+    const { t } = useTranslation();
 
     const handleChange = (e)=>{
         const {value} = e.target;
@@ -15,9 +17,9 @@ export default function SearchComponent({setId ,id}) {
     // Function to fetch data
     const getData = async()=>{
         try{
-            console.log("the id == >", id)
             const res = await axios.get(`https://tracking.bosta.co/shipments/track/${id}`)
             setData(res.data);
+            handleClose(false)
         } catch(error){
             console.error("The Error is  ==> ", Error.error)
         }
@@ -25,7 +27,7 @@ export default function SearchComponent({setId ,id}) {
 
 	return (
 		<div className="search-container">
-			<p className="search-p">Track Your Cargo</p>
+			<p className="search-p">{t('trackYourCargo')}</p>
             <div className="search">
                 <FiSearch className="search-icon" onClick={getData} />
                 <input name="id" type="text" placeholder="Cargo ID" onChange={handleChange} />
