@@ -114,7 +114,7 @@ function DefaultNav() {
 
 			<div className="logo-part">
 				<p>{t("logo")}</p>
-				<img src="/Logo.png" alt="Logo" />
+				<img src={Logo} alt="Logo" />
 			</div>
 		</nav>
 	);
